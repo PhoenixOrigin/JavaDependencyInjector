@@ -1,5 +1,6 @@
 package net.phoenix;
 
+import net.bytebuddy.agent.ByteBuddyAgent;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
@@ -55,7 +56,7 @@ public class ValueStorer {
                 ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
                 classNode.accept(classWriter);
                 ClassDefinition definition = new ClassDefinition(clazz, classWriter.toByteArray());
-                RedefineClassAgent.redefineClasses(definition);
+                ByteBuddyAgent.getInstrumentation().redefineClasses(definition);
             } catch (Exception e) {
                 e.printStackTrace();
             }

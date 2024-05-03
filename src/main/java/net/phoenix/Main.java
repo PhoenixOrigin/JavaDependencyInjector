@@ -1,9 +1,14 @@
 package net.phoenix;
 
 
+import net.bytebuddy.agent.ByteBuddyAgent;
+import net.bytebuddy.agent.builder.AgentBuilder;
+import net.bytebuddy.asm.Advice;
+
 public class Main {
     public static void main(String[] args) {
         ValueStorer.storeValue(String.class, "Ashley");
+        ByteBuddyAgent.install();
         ValueStorer.redefine("net.phoenix");
         testMethod("Hello", "World");
     }

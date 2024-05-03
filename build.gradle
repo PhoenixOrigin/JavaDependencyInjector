@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'net.bytebuddy.byte-buddy-gradle-plugin' version '1.14.14'
 }
 
 group = 'net.phoenix'
@@ -10,18 +11,14 @@ repositories {
     mavenCentral()
 }
 
-application {
-    mainClass = 'net.phoenix.Main'
-}
-
-applicationDefaultJvmArgs = ["-XX:+EnableDynamicAgentLoading", "-Djdk.attach.allowAttachSelf=true"]
-
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation 'org.javassist:javassist:3.30.2-GA'
     implementation 'org.ow2.asm:asm:9.7'
     implementation 'org.ow2.asm:asm-tree:9.7'
+    implementation 'net.bytebuddy:byte-buddy-agent:1.14.14'
+    implementation 'net.bytebuddy:byte-buddy-dep:1.14.14'
 }
 
 test {
